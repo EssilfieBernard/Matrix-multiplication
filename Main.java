@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -46,15 +45,9 @@ public class Main {
                 // Keep asking for input until a valid integer is entered
                 boolean validInput = false;
                 while (!validInput) {
-                    try {
-                        System.out.print("Enter value for position (" + (i + 1) + "," + (j + 1) + "): ");
-                        // Assign user input to the current matrix position
-                        matrix[i][j] = scanner.nextInt();
-                        validInput = true;  // If input is valid, exit the loop
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter an integer.");
-                        scanner.nextLine(); // Clear the invalid input from the buffer
-                    }
+                    // Assign user input to the current matrix position
+                    matrix[i][j] = getInput(scanner, "Enter value for position (" + (i + 1) + "," + (j + 1) + "): ");
+                    validInput = true;
                 }
             }
         }
@@ -63,9 +56,10 @@ public class Main {
 
     // Function to accept input from user and return it.
     private static int getInput(Scanner scanner, String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         while (!scanner.hasNextInt()) {
             System.out.println("Invalid input. Please enter an integer.");
+            System.out.print(prompt);
             scanner.next(); // Discards the invalid input
         }
         return scanner.nextInt();
