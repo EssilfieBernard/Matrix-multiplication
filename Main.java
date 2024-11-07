@@ -16,10 +16,12 @@ public class Main {
         int rows2 = getInput(scanner, "Enter number of rows for second matrix:");
 
         // Checks if matrices are compatible for multiplication
-        if (columns1 != rows2)
-            throw new IllegalArgumentException("Number of columns of first matrix must be equal to number of rows of second matrix.");
-
+        while (columns1 != rows2) {
+            System.out.println("Number of columns of first matrix must be equal to number of rows of second matrix.");
+            rows2 = getInput(scanner, "Enter number of rows for second matrix:");
+        }
         int columns2 = getInput(scanner, "Enter number of columns for second matrix:");
+
 
         int[][] matrix2 = new int[rows2][columns2]; // initializes second matrix
         matrixValues(scanner, matrix2, rows2, columns2); // populating second matrix with user inputs
