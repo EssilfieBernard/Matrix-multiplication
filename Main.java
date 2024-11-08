@@ -5,22 +5,22 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         // Getting number of rows and columns for first matrix
-        int rows1 = getInput(scanner, "Enter number of rows for first matrix:");
-        int columns1 = getInput(scanner, "Enter number of columns for first matrix:");
+        int rows1 = checkDimensionValidity(scanner, "Enter number of rows for first matrix:");
+        int columns1 = checkDimensionValidity(scanner, "Enter number of columns for first matrix:");
 
         int[][] matrix1 = new int[rows1][columns1]; // initializes first matrix
 
         print(matrixValues(scanner, matrix1, rows1, columns1)); // populating first matrix with user input and printing it
 
         // Getting number of rows and columns for second matrix
-        int rows2 = getInput(scanner, "Enter number of rows for second matrix:");
+        int rows2 = checkDimensionValidity(scanner, "Enter number of rows for second matrix:");
 
         // Checks if matrices are compatible for multiplication
         while (columns1 != rows2) {
             System.out.println("Number of columns of first matrix must be equal to number of rows of second matrix.");
             rows2 = getInput(scanner, "Enter number of rows for second matrix:");
         }
-        int columns2 = getInput(scanner, "Enter number of columns for second matrix:");
+        int columns2 = checkDimensionValidity(scanner, "Enter number of columns for second matrix:");
 
 
         int[][] matrix2 = new int[rows2][columns2]; // initializes second matrix
@@ -37,6 +37,26 @@ public class Main {
         // Prints resulting matrix after multiplying first and second matrix
         System.out.println("Matrix C:");
         print(multiply(matrix1, matrix2));
+    }
+
+    // Helper function to check if a value is zero or negative
+    private static boolean isAPositiveInteger(int value) {
+        return value > 0;
+    }
+
+
+
+    // Helper function to ensure the number of rows and columns are positive.
+    private static int checkDimensionValidity(Scanner scanner, String prompt) {
+        int value;
+        while (true) {
+            value = getInput(scanner, prompt);
+            if (isAPositiveInteger(value))
+                break;
+            else
+                System.out.println("Value must be positive.");
+        }
+        return value;
     }
 
     // Helper function to populate matrix with values a user enters.
